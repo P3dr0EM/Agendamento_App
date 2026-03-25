@@ -4,7 +4,7 @@
 O UNA App é uma solução centralizada e automatizada, projetada para otimizar e modernizar o sistema de agendamentos da faculdade Una. O projeto visa substituir processos manuais e descentralizados (como o uso de Google Forms) por uma plataforma intuitiva que conecta alunos, professores e coordenadores.
  </p>
 
-## 👨‍🎓 Sobre o Projeto
+## Sobre o Projeto
 
 <p align="justify">
 Atualmente, o agendamento de consultas e atendimentos na instituição apresenta desafios como a falta de integração em tempo real e a ausência de um histórico consolidado para o aluno. O UNA App resolve esses problemas ao oferecer uma interface simplificada para marcação de:
@@ -14,7 +14,7 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
  - Monitorias.
  - Consultas acadêmicas diversas.
 
-## 👨‍🎓 Objetivos
+## Objetivos
 
 **Para Alunos:**
 
@@ -28,13 +28,13 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
  - **Painel de Controle:** Gestão de disponibilidade de horários e serviços.
  - **Automação:** Processamento automático de recebimento e confirmação de agendamentos.
 
-## ⚙ Funcionalidades
+## Funcionalidades
 
  - **Autenticação de Usuários:** Login seguro para alunos e administradores.
  - **Módulo do Aluno:** Visualização de serviços e horários disponíveis.
  - **Gestão de Agendamentos:** Ferramentas para administrar o fluxo de atendimentos.
 
-## ⚙ Tecnologias utilizadas
+## Tecnologias utilizadas
 
  - **Dart + Flutter**  
  - **MySQL (Banco de Dados)**
