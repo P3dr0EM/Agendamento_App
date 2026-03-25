@@ -19,9 +19,9 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
 **Para Alunos:**
 
  - **Facilidade de Agendamento:** Interface intuitiva para visualizar horários e agendar com poucos cliques.
- - **Gestão Centralizada:** Visualização, cancelamento e reagendamento de todos os compromissos em um único local.
  - **Notificações:** Envio automático de confirmações e lembretes.
  - **Histórico:** Acesso a todos os atendimentos já realizados.
+ - **Gestão Centralizada:** Visualização, cancelamento e reagendamento de todos os compromissos em um único local.
 
 **Para Administradores:**
 
