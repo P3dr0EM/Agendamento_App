@@ -30,7 +30,7 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
 
  - Automação: Processamento automático de recebimento e confirmação de agendamentos.
 
-## Funcinalidades (Escopo Inicial)
+## Funcionalidades (Escopo Inicial)
 
  - Autenticação de Usuários: Login seguro para alunos e administradores.
 
