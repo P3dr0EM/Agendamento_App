@@ -1,7 +1,7 @@
-# Agendamento_App 📆
+# Agendamento App 📆
 
 <p align="justify">
-O UNA App é uma solução centralizada e automatizada, projetada para otimizar e modernizar o sistema de agendamentos da faculdade Una. O projeto visa substituir processos manuais e descentralizados (como o uso de Google Forms) por uma plataforma intuitiva que conecta alunos, professores e coordenadores.
+O Agendamento App é uma solução centralizada e automatizada, projetada para otimizar e modernizar o sistema de agendamentos da faculdade Una. O projeto visa substituir processos manuais e descentralizados (como o uso de Google Forms) por uma plataforma intuitiva que conecta alunos, professores e coordenadores.
  </p>
 
 ## 📌 Sobre o Projeto
