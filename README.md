@@ -43,8 +43,8 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
 
 ## 📌 Integrantes do Grupo
 
-**Pedro Gabriel Evangelista Marques** - RA 42520893 <br>
-**Leonardo Ferreira Tomaz** - RA 42414791 <br>
-**Lucas Gabriel Abade Oliveira** - RA 42420206 <br>
-**Macxuel Lázaro** - RA 42420841 <br>
-**Mariana de Souza Porto** - RA 42413614
+**Pedro Gabriel Evangelista Marques (Front-end Flutter e auxiliar no back-end)** - RA 42520893 <br>
+**Leonardo Ferreira Tomaz (Front-end Flutter)** - RA 42414791 <br>
+**Lucas Gabriel Abade Oliveira (Back-end Java Spring)** - RA 42420206 <br>
+**Macxuel Lázaro (Documentação e suporte)** - RA 42420841 <br>
+**Mariana de Souza Porto (Documentação e suporte)** - RA 42413614
