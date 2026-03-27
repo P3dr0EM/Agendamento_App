@@ -4,7 +4,7 @@
 O UNA App é uma solução centralizada e automatizada, projetada para otimizar e modernizar o sistema de agendamentos da faculdade Una. O projeto visa substituir processos manuais e descentralizados (como o uso de Google Forms) por uma plataforma intuitiva que conecta alunos, professores e coordenadores.
  </p>
 
-## Sobre o Projeto
+## 📌 Sobre o Projeto
 
 <p align="justify">
 Atualmente, o agendamento de consultas e atendimentos na instituição apresenta desafios como a falta de integração em tempo real e a ausência de um histórico consolidado para o aluno. O UNA App resolve esses problemas ao oferecer uma interface simplificada para marcação de:
@@ -14,7 +14,7 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
  - Monitorias.
  - Consultas acadêmicas diversas.
 
-## Objetivos
+## 📌 Objetivos
 
 **Para Alunos:**
 
@@ -28,23 +28,49 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
  - **Painel de Controle:** Gestão de disponibilidade de horários e serviços.
  - **Automação:** Processamento automático de recebimento e confirmação de agendamentos.
 
-## Funcionalidades
+## ⚙ Funcionalidades
 
  - **Autenticação de Usuários:** Login seguro para alunos e administradores.
  - **Módulo do Aluno:** Visualização de serviços e horários disponíveis.
  - **Gestão de Agendamentos:** Ferramentas para administrar o fluxo de atendimentos.
 
-## Tecnologias utilizadas
+## ⚙ Tecnologias utilizadas
 
  - **Dart + Flutter**  
  - **MySQL (Banco de Dados)**
  - **Google Calendar API**
  - **Firebase Console**
 
+## 📁 Estruturas de Pastas
+
+**android/, ios/, linux/, macos/, web/, windows/:** Diretório de códigos para que o Flutter rode em cada uma das plataformas.
+
+**assets/:** Diretório utilizado para armazenar arquivos estáticos e recursos brutos.
+
+**lib/:** Diretório onde reside todo o código-fonte do projeto em Dart.
+
+**lib/app/:** Diretório que contém a estrutura global do aplicativo.
+
+**lib/modules/:** Diretório que organiza as funcionalidades do aplicativo.
+
+**lib/routes/:** Diretório que centraliza toda a navegação do aplicativo, definindo as strings das rotas.
+
+**lib/services/:** Diretório responsável por habitar tarefas e/ou funcionalidades de infraestrutura global.
+
+**lib/main.dart:** Onde o app é iniciado e as configurações são carregadas.
+
+## 📌 Como executar e testar o projeto
+
+ 1. Baixe o App no seu dispositivo através do APK.
+ 2. Escolha o serviço que você precisa.
+ 3. Agende o dia e horário disponíveis.
+
 ## 📌 Integrantes do Grupo
 
-**Pedro Gabriel Evangelista Marques (Front-end Flutter e auxiliar no back-end)** - RA 42520893 <br>
-**Leonardo Ferreira Tomaz (Front-end Flutter)** - RA 42414791 <br>
-**Lucas Gabriel Abade Oliveira (Back-end Java Spring)** - RA 42420206 <br>
-**Macxuel Lázaro (Documentação e suporte)** - RA 42420841 <br>
-**Mariana de Souza Porto (Documentação e suporte)** - RA 42413614
+| **NOME** | **RA** | **FUNÇÃO** |
+| :--- | :--- | :--- |
+| Pedro Gabriel Evangelista Marques | 42520893 | Front-end Flutter & Back-end |
+| Leonardo Ferreira Tomaz | 42414791 | Front-end Flutter |
+| Lucas Gabriel Abade Oliveira | 42420206 | Back-end |
+| Macxuel Lázaro | 42420841 | Documentação e Suporte |
+| Mariana de Souza Porto | 42413614 | Documentação e Suporte |
