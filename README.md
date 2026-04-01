@@ -64,6 +64,9 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
  1. Baixe o App no seu dispositivo através do APK.
  2. Escolha o serviço que você precisa.
  3. Agende o dia e horário disponíveis.
+ 4. Você pode baixar a versão mais recente do aplicativo pronta para instalação no link abaixo:
+
+[📥 Baixar APK v1.0.0]()
 
 ## 📌 Integrantes do Grupo
 
