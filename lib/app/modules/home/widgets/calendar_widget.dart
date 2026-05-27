@@ -123,14 +123,15 @@ class CalendarWidget extends StatelessWidget {
                   final formattedDate =
                       "${controller.selectedDay.value.day.toString().padLeft(2, '0')}/${controller.selectedDay.value.month.toString().padLeft(2, '0')}/${controller.selectedDay.value.year}";
 
-                  Get.snackbar(
-                    'Data Confirmada',
-                    'Você escolheu: $formattedDate',
-                    snackPosition: SnackPosition.BOTTOM,
-                    margin: const EdgeInsets.all(12),
-                    backgroundColor: Colors.black87,
-                    colorText: Colors.white,
-                  );
+                  ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                      content: Text('Você escolheu: $formattedDate'),
+                      backgroundColor: Colors.black87,
+                      behavior: SnackBarBehavior.floating,
+                      margin: const EdgeInsets.all(12),
+                      duration: const Duration(seconds: 3),
+                   ),
+                 );
                 },
               ),
             ),
