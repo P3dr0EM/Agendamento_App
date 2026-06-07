@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:una_agendamento/app/modules/home/home_controller.dart';
 
 // Enum para os status do dia
 enum DayStatus { available, full, closed, past }
@@ -54,14 +55,14 @@ class AgendamentoController extends GetxController {
   Future<void> _initLocalNotifications() async {
     // Android continua igual
     const android = AndroidInitializationSettings('@mipmap/ic_launcher');
-    
+
     // ATUALIZAÇÃO: iOS agora usa DarwinInitializationSettings
     const ios = DarwinInitializationSettings(
       requestAlertPermission: true,
       requestBadgePermission: true,
       requestSoundPermission: true,
     );
-    
+
     const initSettings = InitializationSettings(android: android, iOS: ios);
 
     await _localNotifications.initialize(
@@ -184,7 +185,17 @@ class AgendamentoController extends GetxController {
     );
 
     if (created) {
-      // Notificação local de confirmação imediata
+      // Normaliza a data (apenas ano, mês, dia)
+      final dataApenasDia = DateTime(start.year, start.month, start.day);
+
+      // === NOVO: Guarda a data no HomeController que está sempre vivo ===
+      if (Get.isRegistered<HomeController>()) {
+        final homeCtrl = Get.find<HomeController>();
+        if (!homeCtrl.diasAgendados.contains(dataApenasDia)) {
+          homeCtrl.diasAgendados.add(dataApenasDia);
+        }
+      }
+
       await _showLocalConfirmationNotification(start);
       final diaFormatado = DateFormat('dd/MM/yyyy').format(start);
       final horaFormatada = DateFormat('HH:mm').format(start);
@@ -198,7 +209,12 @@ class AgendamentoController extends GetxController {
           Get.back(); // Volta para a tela anterior
         },
         textConfirm: 'OK',
-      );      
+      );
+    } else {
+      Get.snackbar(
+        'Erro',
+        'Não foi possível criar o evento no Google Calendar. Verifique as permissões e tente novamente.',
+      );
     }
   }
 
@@ -302,14 +318,14 @@ class AgendamentoController extends GetxController {
 
     // ATUALIZAÇÃO: IOSNotificationDetails virou DarwinNotificationDetails
     const iosDetails = DarwinNotificationDetails();
-    
+
     const details = NotificationDetails(
       android: androidDetails,
       iOS: iosDetails,
     );
 
     final formatted = DateFormat('dd/MM/yyyy HH:mm').format(start);
-    
+
     await _localNotifications.show(
       start.hashCode & 0x7FFFFFFF,
       'Agendamento confirmado',
