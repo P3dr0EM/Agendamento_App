@@ -5,8 +5,11 @@ import 'package:una_agendamento/app/modules/home/home_controller.dart';
 // Os testes relacionados ao HomeController devem ser adicionados aqui
 
 void main() {
+  late HomeController controller;
+
   setUpAll(() {
     Get.put(HomeController());
+    controller = Get.find<HomeController>();
   });
 
   tearDownAll(() {
