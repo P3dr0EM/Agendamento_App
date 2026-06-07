@@ -35,30 +35,29 @@ class CalendarWidget extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             // Obx garante que o calendário se reconstrua ao selecionar um dia.
-            Obx(
-              () => TableCalendar(
-                // Configurações básicas
-                locale: 'pt_BR', // Usa a localização para o português do Brasil
+            Obx(() {
+              // O SEGREDO: Ler a lista reativa aqui fora avisa o Obx que ele
+              // precisa redesenhar o calendário inteiro sempre que um novo dia for adicionado.
+              final diasComAgendamento = controller.diasAgendados.toList();
+
+              return TableCalendar(
+                locale: 'pt_BR',
                 firstDay: DateTime.utc(2020, 1, 1),
                 lastDay: DateTime.utc(2030, 12, 31),
                 focusedDay: controller.focusedDay.value,
-                calendarFormat: CalendarFormat.month, // Mostra o mês inteiro
+                calendarFormat: CalendarFormat.month,
                 availableGestures: AvailableGestures.horizontalSwipe,
 
-                // Estado de seleção
                 selectedDayPredicate: (day) =>
                     isSameDay(controller.selectedDay.value, day),
                 onDaySelected: controller.onDaySelected,
 
-                // Desativa a mudança de foco ao arrastar
                 onPageChanged: (focusedDay) {
                   controller.focusedDay.value = focusedDay;
                 },
 
-                // Estilização
                 headerStyle: const HeaderStyle(
-                  formatButtonVisible:
-                      false, // Esconde o botão de formato (ex: "2 weeks")
+                  formatButtonVisible: false,
                   titleCentered: true,
                   titleTextStyle: TextStyle(
                     fontSize: 18.0,
@@ -73,15 +72,13 @@ class CalendarWidget extends StatelessWidget {
                     color: Colors.black54,
                   ),
                 ),
+
                 calendarStyle: CalendarStyle(
-                  // Estilo do dia de hoje
                   todayDecoration: BoxDecoration(
                     color: Colors.grey[300],
                     shape: BoxShape.circle,
                   ),
-                  todayTextStyle: TextStyle(color: Colors.black87),
-
-                  // Estilo do dia selecionado
+                  todayTextStyle: const TextStyle(color: Colors.black87),
                   selectedDecoration: const BoxDecoration(
                     color: Colors.blue,
                     shape: BoxShape.circle,
@@ -90,19 +87,43 @@ class CalendarWidget extends StatelessWidget {
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
-
-                  // Estilo dos marcadores de fim de semana
                   weekendTextStyle: TextStyle(color: Colors.red.shade400),
-
-                  // Remove marcadores fora do mês atual
                   outsideDaysVisible: false,
                 ),
+
                 daysOfWeekStyle: const DaysOfWeekStyle(
-                  // Estilo dos nomes dos dias da semana (Seg, Ter, etc.)
                   weekendStyle: TextStyle(color: Colors.red),
                 ),
-              ),
-            ),
+
+                // Construtor dos Círculos
+                calendarBuilders: CalendarBuilders(
+                  markerBuilder: (context, day, events) {
+                    final normalizedDay = DateTime(
+                      day.year,
+                      day.month,
+                      day.day,
+                    );
+
+                    // Usa a lista que carregamos no início do Obx
+                    if (diasComAgendamento.contains(normalizedDay)) {
+                      return Positioned.fill(
+                        child: Container(
+                          margin: const EdgeInsets.all(4.0),
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(
+                              color: Colors.blueAccent,
+                              width: 2.5,
+                            ),
+                          ),
+                        ),
+                      );
+                    }
+                    return null;
+                  },
+                ),
+              );
+            }),
             const SizedBox(height: 20),
             // Botão de confirmação com estilo
             SizedBox(
@@ -124,14 +145,14 @@ class CalendarWidget extends StatelessWidget {
                       "${controller.selectedDay.value.day.toString().padLeft(2, '0')}/${controller.selectedDay.value.month.toString().padLeft(2, '0')}/${controller.selectedDay.value.year}";
 
                   ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
+                    SnackBar(
                       content: Text('Você escolheu: $formattedDate'),
                       backgroundColor: Colors.black87,
                       behavior: SnackBarBehavior.floating,
                       margin: const EdgeInsets.all(12),
                       duration: const Duration(seconds: 3),
-                   ),
-                 );
+                    ),
+                  );
                 },
               ),
             ),
