@@ -61,7 +61,25 @@ void main() {
     expect(controller.searchResults.length, 10);
   });
 
-  //--- 5. Verifica se está guardando e atualizando o dia que o usuário escolheu no calendário
+  //--- 5. Verifica se o índice é atualizado quando o usuário interage com o carrossel 
+  test('Deve atualizar o índice da página do carrossel', () {
+    controller.onCarouselPageChanged(2);
+
+    expect(controller.carrosselPagina.value, 2);
+  });
+
+  //--- 6. Verifica se o tabIndex é atualizado corretamente ao mudar de aba
+  test('Deve atualizar o tabIndex ao mudar de aba', () {
+    controller.changeTabIndex(0);
+
+    expect(controller.tabIndex.value, 0);
+
+    //Observação: Se testar o index 1 diretamente vai disparar o showCalendarPicker(),
+    //que abre um BottomSheet, e como o teste roda na memória sem tela nenhuma o GetX
+    //vai procurar uma tela aberta para jogar esse BottomSheet e dará erro no terminal
+  });
+
+  //--- 7. Verifica se está guardando e atualizando o dia que o usuário escolheu no calendário
   test('Deve atualizar as datas selecionadas e focadas', () {
     final dataSelecionada = DateTime(2026, 6, 15); //Dia que o usuário escolheu no calendário
     final dataFocada = DateTime(2026, 6, 15); //Mês/ano que o calendário está exibindo na tela
