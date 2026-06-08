@@ -36,8 +36,8 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
 
 ## ⚙ Tecnologias utilizadas
 
- - **Dart + Flutter**  
- - **MySQL (Banco de Dados)**
+ - **Dart Programming Language**
+ - **Flutter Framework**  
  - **Google Calendar API**
  - **Firebase Console**
 
@@ -52,6 +52,8 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
 **lib/app/:** Diretório que contém a estrutura global do aplicativo.
 
 **lib/modules/:** Diretório que organiza as funcionalidades do aplicativo.
+
+**lib/test/:** Diretório que contém os testes unitários do aplicativo.
 
 **lib/routes/:** Diretório que centraliza toda a navegação do aplicativo, definindo as strings das rotas.
 

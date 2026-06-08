@@ -29,7 +29,7 @@ void main() {
     expect(controller.searchResults.length, 10); // Quantidade de itens em _allData
   });
 
-  //--- 2. Verifica a interação do usuário com a barra de pesquisa
+  //--- 3. Verifica a interação do usuário com a barra de pesquisa
   test('Deve alternar o estado de isSearching ao chamar toggleSearch', () {
     expect(controller.isSearching.value, false);
     
@@ -40,7 +40,7 @@ void main() {
     expect(controller.isSearching.value, false);
   });
 
-  //--- 3. Verifica o funcionamento da barra de pesquisa
+  //--- 4. Verifica o funcionamento da barra de pesquisa
   test('Deve filtrar os resultados corretamente com base na query', () {
     // Inicializa o listener simulando o onInit
     controller.onInit();
