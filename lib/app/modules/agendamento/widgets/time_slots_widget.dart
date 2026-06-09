@@ -8,25 +8,37 @@ class TimeSlotsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.find<AgendamentoController>();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     // Obx para mostrar/esconder toda a área de horários
     return Obx(() {
       // Se nenhum dia estiver selecionado, não mostra nada
       if (controller.selectedDay.value == null) {
-        return const Center(
+        return Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.0),
-            child: Text('Selecione um dia no calendário.'),
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
+            child: Text(
+              'Selecione um dia no calendário.',
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: colorScheme.onSurface,
+              ),
+            ),
           ),
         );
       }
 
       // Se não houver horários, mostra mensagem
       if (controller.availableTimes.isEmpty) {
-        return const Center(
+        return Center(
             child: Padding(
-          padding: EdgeInsets.all(20.0),
-          child: Text('Nenhum horário disponível para este dia.'),
+          padding: const EdgeInsets.all(20.0),
+          child: Text(
+            'Nenhum horário disponível para este dia.',
+            style: theme.textTheme.bodyLarge?.copyWith(
+              color: colorScheme.onSurface,
+            ),
+          ),
         ));
       }
 
@@ -36,8 +48,10 @@ class TimeSlotsWidget extends StatelessWidget {
         children: [
           Text(
             'Horários disponíveis',
-            style:
-                Get.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+            style: theme.textTheme.titleLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+              color: colorScheme.onSurface,
+            ),
           ),
           const SizedBox(height: 12),
           // O Wrap permite que os botões quebrem a linha
@@ -54,12 +68,14 @@ class TimeSlotsWidget extends StatelessWidget {
                   onSelected: (selected) {
                     controller.selectTime(time);
                   },
-                  selectedColor: const Color(0xFF5D0890),
+                  selectedColor: colorScheme.primary,
                   labelStyle: TextStyle(
-                    color: isSelected ? Colors.white : Colors.black,
+                    color: isSelected
+                        ? colorScheme.onPrimary
+                        : colorScheme.onSurface,
                     fontWeight: FontWeight.bold,
                   ),
-                  backgroundColor: Colors.grey[200],
+                  backgroundColor: colorScheme.surfaceContainerHighest,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),

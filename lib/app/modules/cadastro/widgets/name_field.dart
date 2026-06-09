@@ -21,6 +21,8 @@ class NameField extends GetView<CadastroController> {
           onSubmitted: (_) {
             FocusScope.of(context).requestFocus(controller.cpfFocus);
           },
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+          cursorColor: Theme.of(context).colorScheme.onSurface,
           decoration: InputDecoration(
             label: const Text("NOME"),
             errorText: controller.errorNome.value, //chama o controlador de erro

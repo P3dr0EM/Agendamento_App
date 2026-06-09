@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:una_agendamento/app/routes/app_routes.dart';
 
 class WelcomeHeaderWidget extends StatelessWidget {
   const WelcomeHeaderWidget({super.key});
@@ -57,13 +58,7 @@ class WelcomeHeaderWidget extends StatelessWidget {
           // 4. ÍCONE DE PERFIL (CÍRCULO)
           GestureDetector(
             onTap: () {
-              // Funcionalidade futura
-              Get.snackbar(
-                'Em Breve!',
-                'Aqui você será levado para a página de perfil.',
-                snackPosition: SnackPosition.BOTTOM,
-              );
-              // Futuramente: Get.toNamed('/perfil');
+              Get.toNamed(Routes.PROFILE);
             },
             child: CircleAvatar(
               radius: 24, // "maior" que o ícone de interrogação

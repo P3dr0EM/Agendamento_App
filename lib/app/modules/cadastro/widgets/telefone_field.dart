@@ -18,7 +18,8 @@ class TelefoneField extends GetView<CadastroController> {
           maxLength: 9,
           focusNode: controller.telefoneFocus,
           textInputAction: TextInputAction.done,
-
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+          cursorColor: Theme.of(context).colorScheme.onSurface,
           decoration: InputDecoration(
             label: const Text("TELEFONE"),
             errorText:

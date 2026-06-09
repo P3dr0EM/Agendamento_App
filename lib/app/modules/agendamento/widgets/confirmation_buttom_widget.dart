@@ -9,17 +9,18 @@ class ConfirmationButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final controller = Get.find<AgendamentoController>();
 
     return Container(
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: theme.colorScheme.surfaceContainerHighest,
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
-            blurRadius: 10,
-            offset: const Offset(0, -5),
+            color: theme.shadowColor.withOpacity(0.25),
+            blurRadius: 12,
+            offset: const Offset(0, -4),
           ),
         ],
       ),
@@ -28,11 +29,18 @@ class ConfirmationButtonWidget extends StatelessWidget {
                 ? controller.confirmarAgendamento
                 : null,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF5D0890),
-              foregroundColor: Colors.white,
+              backgroundColor: theme.colorScheme.primary,
+              foregroundColor: theme.colorScheme.onPrimary,
+              disabledBackgroundColor:
+                  theme.colorScheme.onSurface.withOpacity(0.12),
+              disabledForegroundColor:
+                  theme.colorScheme.onSurface.withOpacity(0.38),
               padding: const EdgeInsets.symmetric(vertical: 16),
-              textStyle:
-                  const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              textStyle: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: theme.colorScheme.onPrimary,
+              ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
               ),

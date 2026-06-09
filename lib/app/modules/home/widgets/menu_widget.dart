@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:una_agendamento/constants.dart';
+import 'package:una_agendamento/app/routes/app_routes.dart';
 
 class MenuWidget extends StatelessWidget {
   const MenuWidget({super.key});
@@ -33,8 +36,7 @@ class MenuWidget extends StatelessWidget {
             leading: const Icon(Icons.home),
             title: const Text('Início'),
             onTap: () {
-              // Ao ser tocado, fecha o drawer.
-              Get.back();
+              Scaffold.of(context).closeDrawer();
             },
           ),
           // Item de menu "Configurações"
@@ -42,20 +44,29 @@ class MenuWidget extends StatelessWidget {
             leading: const Icon(Icons.settings),
             title: const Text('Configurações'),
             onTap: () {
-              // Fecha o drawer e pode navegar para outra página.
               Get.back();
-              // Exemplo: Get.toNamed('/configuracoes');
-              Get.snackbar('Navegação', 'Indo para Configurações!');
+              Get.toNamed('/settings');
             },
           ),
+
           const Divider(), // Uma linha divisória visual
           // Item de menu "Sair"
           ListTile(
             leading: const Icon(Icons.exit_to_app),
             title: const Text('Sair'),
-            onTap: () {
-              // Lógica de logout aqui.
+            onTap: () async {
               Get.back();
+              try {
+                // Sign out do Firebase
+                await FirebaseAuth.instance.signOut();
+                // Sign out do Google
+                await GoogleSignIn().signOut();
+                // Navegar para login
+                Get.offAllNamed(Routes.LOGIN);
+              } catch (e) {
+                debugPrint('Erro ao fazer logout: $e');
+                Get.snackbar('Erro', 'Falha ao fazer logout');
+              }
             },
           ),
         ],

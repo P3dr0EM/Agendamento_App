@@ -20,6 +20,9 @@ class LoginView extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+
     return Scaffold(
       backgroundColor: corRoxaPrincipal,
 
@@ -54,7 +57,7 @@ class LoginView extends GetView<LoginController> {
                           child: Container(
                             constraints: const BoxConstraints(maxWidth: 500),
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: isDark ? cinzaEscuro : branco,
                               borderRadius: BorderRadius.circular(16.0),
                               boxShadow: [
                                 BoxShadow(

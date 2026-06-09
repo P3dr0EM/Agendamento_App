@@ -6,16 +6,18 @@ class ForgetPassword extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-                padding: EdgeInsetsGeometry.only(left: 8, right: 8),
-                child: Text(
-                  "Esqueceu a senha? Clique aqui!",
-                  textAlign: TextAlign.left,
-                  style: TextStyle(
-                    color: corRoxaPrincipal,
-                    decoration: TextDecoration.underline,
-                  ),
-                ),
-              );
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
+    return Padding(
+      padding: const EdgeInsetsGeometry.only(left: 8, right: 8),
+      child: Text(
+        "Esqueceu a senha? Clique aqui!",
+        textAlign: TextAlign.left,
+        style: TextStyle(
+          color: isDark ? Colors.grey[300] : corRoxaPrincipal,
+          decoration: TextDecoration.none,
+        ),
+      ),
+    );
   }
 }

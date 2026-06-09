@@ -14,12 +14,15 @@ class CalendarCardWidget extends StatelessWidget {
     // Encontra o controller que já foi inicializado pelo Binding
     final controller = Get.find<AgendamentoController>();
 
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+
     return Card(
       elevation: 4,
+      color: colorScheme.surfaceContainerHighest,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        // Obx para reconstruir o calendário quando o foco/seleção mudar
         child: Obx(() => TableCalendar(
               locale: 'pt_BR',
               focusedDay: controller.focusedDay.value,
@@ -30,55 +33,113 @@ class CalendarCardWidget extends StatelessWidget {
                   controller.isSameDay(controller.selectedDay.value, day),
               onDaySelected: controller.onDaySelected,
               onPageChanged: (focused) => controller.focusedDay.value = focused,
-              
-              // Adicionamos a correção da rolagem
               availableGestures: AvailableGestures.horizontalSwipe,
-
-              // Constrói os dias customizados
+              headerStyle: HeaderStyle(
+                formatButtonVisible: false,
+                titleCentered: true,
+                titleTextStyle: theme.textTheme.titleMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: colorScheme.onSurface,
+                ),
+                leftChevronIcon: Icon(
+                  Icons.chevron_left,
+                  color: colorScheme.onSurface,
+                ),
+                rightChevronIcon: Icon(
+                  Icons.chevron_right,
+                  color: colorScheme.onSurface,
+                ),
+              ),
+              calendarStyle: CalendarStyle(
+                todayDecoration: BoxDecoration(
+                  color: colorScheme.secondaryContainer,
+                  shape: BoxShape.circle,
+                ),
+                todayTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                  color: colorScheme.onSecondaryContainer,
+                ),
+                selectedDecoration: BoxDecoration(
+                  color: colorScheme.primary,
+                  shape: BoxShape.circle,
+                ),
+                selectedTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                  color: colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
+                defaultTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                  color: colorScheme.onSurface,
+                ),
+                weekendTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                  color: colorScheme.secondary,
+                ),
+                outsideDaysVisible: false,
+                outsideTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                  color: theme.disabledColor,
+                ),
+              ),
+              daysOfWeekStyle: DaysOfWeekStyle(
+                weekdayStyle: theme.textTheme.bodySmall!.copyWith(
+                  color: colorScheme.onSurfaceVariant,
+                ),
+                weekendStyle: theme.textTheme.bodySmall!.copyWith(
+                  color: colorScheme.secondary,
+                ),
+              ),
               calendarBuilders: CalendarBuilders(
                 defaultBuilder: (context, day, focusedDay) {
                   final status = controller.getDayStatus(day);
-                  Color? corTexto;
+                  Color corTexto;
                   if (status == DayStatus.closed || status == DayStatus.past) {
-                    corTexto = Colors.grey[400];
+                    corTexto = theme.disabledColor;
                   } else if (status == DayStatus.full) {
-                    corTexto = Colors.red[300];
+                    corTexto = colorScheme.secondary;
                   } else {
-                    corTexto = Colors.black87;
+                    corTexto = colorScheme.onSurface;
                   }
                   return Center(
-                      child: Text('${day.day}', style: TextStyle(color: corTexto)));
+                    child: Text('${day.day}', style: TextStyle(color: corTexto)),
+                  );
                 },
                 outsideBuilder: (context, day, focusedDay) {
                   return Center(
-                      child: Text('${day.day}',
-                          style: TextStyle(color: Colors.grey[300])));
+                    child: Text(
+                      '${day.day}',
+                      style: TextStyle(color: theme.disabledColor.withOpacity(0.7)),
+                    ),
+                  );
                 },
                 todayBuilder: (context, day, focusedDay) {
                   return Center(
                     child: Container(
                       decoration: BoxDecoration(
-                        color: const Color(0xFF5D0890).withOpacity(0.3),
+                        color: colorScheme.secondaryContainer,
                         shape: BoxShape.circle,
                       ),
                       padding: const EdgeInsets.all(8),
-                      child: Text('${day.day}',
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text(
+                        '${day.day}',
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: colorScheme.onSecondaryContainer,
+                        ),
+                      ),
                     ),
                   );
                 },
                 selectedBuilder: (context, day, focusedDay) {
                   return Center(
                     child: Container(
-                      decoration: const BoxDecoration(
-                        color: Color(0xFF5D0890),
+                      decoration: BoxDecoration(
+                        color: colorScheme.primary,
                         shape: BoxShape.circle,
                       ),
                       padding: const EdgeInsets.all(8),
                       child: Text(
                         '${day.day}',
-                        style: const TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
+                        style: theme.textTheme.bodyMedium!.copyWith(
+                          color: colorScheme.onPrimary,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   );
