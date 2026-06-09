@@ -21,6 +21,8 @@ class CpfField extends GetView<CadastroController> {
           onSubmitted: (_) {
             FocusScope.of(context).requestFocus(controller.emailFocus);
           },
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+          cursorColor: Theme.of(context).colorScheme.onSurface,
           decoration: InputDecoration(
             label: const Text("CPF"),
             errorText: controller.errorCpf.value, //chama o controlador de erro

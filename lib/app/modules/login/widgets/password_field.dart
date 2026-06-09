@@ -14,8 +14,12 @@ class PasswordField extends GetView<LoginController> {
                   controller: controller.senhaInput, //chama o controlador de texto
                   obscureText: true,
                   keyboardType: TextInputType.text,
-                  decoration: InputDecoration(label: const Text("SENHA"),
-                  errorText: controller.errorPassword.value), //chama o controlador de erro   
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  cursorColor: Theme.of(context).colorScheme.onSurface,
+                  decoration: InputDecoration(
+                    label: const Text("SENHA"),
+                    errorText: controller.errorPassword.value,
+                  ), //chama o controlador de erro   
                 ),)
               );
   }

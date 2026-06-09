@@ -24,6 +24,8 @@ class DddField extends GetView<CadastroController> {
               controller.telefoneFocus,
             ); // Muda o foco para o telefone
           },
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+          cursorColor: Theme.of(context).colorScheme.onSurface,
           decoration: InputDecoration(
             label: const Text("DDD"),
             errorText: controller.errorddd.value, //chama o controlador de erro
