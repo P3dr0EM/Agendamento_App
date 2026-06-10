@@ -9,11 +9,19 @@ class HomeController extends GetxController {
   final isSearching = false.obs;
   final TextEditingController searchController = TextEditingController();
   final FocusNode searchFocusNode = FocusNode();
+  final diasAgendados = <DateTime>[].obs;
 
   final _allData = <String>[
-    'Flutter', 'GetX', 'State Management', 'Dart',
-    'Firebase', 'API REST', 'Clean Architecture',
-    'SOLID', 'Widget', 'UI/UX'
+    'Flutter',
+    'GetX',
+    'State Management',
+    'Dart',
+    'Firebase',
+    'API REST',
+    'Clean Architecture',
+    'SOLID',
+    'Widget',
+    'UI/UX',
   ].obs;
 
   final searchResults = <String>[].obs;
@@ -30,10 +38,10 @@ class HomeController extends GetxController {
   final carrosselPagina = 0.obs; //índice da página atual do carrossel
 
   //lista das imagens do carrossel
-  final List<String> bannerItems =[
+  final List<String> bannerItems = [
     'assets/images/imagemBanner01.png',
     'assets/images/imagemBanner02.png',
-    'assets/images/imagemBanner03.png'
+    'assets/images/imagemBanner03.png',
   ];
 
   //lista dos icones de serviços
@@ -41,37 +49,33 @@ class HomeController extends GetxController {
     {
       "nome": "Dentista",
       "icone": "assets/icons/dentista.png",
-      "rotaKey": "dentista"
+      "rotaKey": "dentista",
     },
     {
       "nome": "Psicologo",
       "icone": "assets/icons/Célebro.png",
-      "rotaKey": "psicologo"
+      "rotaKey": "psicologo",
     },
     {
       "nome": "Veterinária",
       "icone": "assets/icons/pet.png",
-      "rotaKey": "veterinaria"
+      "rotaKey": "veterinaria",
     },
-    {
-      "nome": "Exames",
-      "icone": "assets/icons/exame.png",
-      "rotaKey": "exames"
-    },
+    {"nome": "Exames", "icone": "assets/icons/exame.png", "rotaKey": "exames"},
     {
       "nome": "Financeiro",
       "icone": "assets/icons/financeiro.png",
-      "rotaKey": "financeiro"
+      "rotaKey": "financeiro",
     },
     {
       "nome": "Fisioterapia",
       "icone": "assets/icons/fisioterapia.png",
-      "rotaKey": "psicologo"
+      "rotaKey": "psicologo",
     },
     {
       "nome": "Medicina",
       "icone": "assets/icons/medicina.png",
-      "rotaKey": "medicina"
+      "rotaKey": "medicina",
     },
   ];
 
@@ -80,34 +84,38 @@ class HomeController extends GetxController {
     print("Navegando para $rotaKey (Serviço: $nomeServico)");
 
     // 2. A navegação continua igual
-    final dynamic resultado = await Get.toNamed('${Routes.AGENDAMENTO}/$rotaKey');
+    final dynamic resultado = await Get.toNamed(
+      '${Routes.AGENDAMENTO}/$rotaKey',
+    );
 
     // 3. A verificação continua igual
     if (resultado == true) {
-      
       // 4. A SOLUÇÃO:
       // Nós ainda esperamos pelo próximo frame, para garantir
       // que o contexto da HomeView esteja 100% ativo.
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        
         // 5. Pegamos o contexto atual e seguro do GetMaterialApp
-        final BuildContext? context = Get.key.currentContext; 
+        final BuildContext? context = Get.key.currentContext;
 
         // 6. Se o contexto existir (e ele vai existir),
         //    usamos o ScaffoldMessenger NATIVO do Flutter.
         if (context != null && context.mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text('Agendamento Confirmado! Seu horário para $nomeServico foi marcado!'),
+              content: Text(
+                'Agendamento Confirmado! Seu horário para $nomeServico foi marcado!',
+              ),
               backgroundColor: corRoxaPrincipal, // A cor do seu app
-              behavior: SnackBarBehavior.floating, // (Opcional, mas fica bonito)
+              behavior:
+                  SnackBarBehavior.floating, // (Opcional, mas fica bonito)
             ),
           );
         }
       });
     }
   }
-  void onCarouselPageChanged(int index){
+
+  void onCarouselPageChanged(int index) {
     carrosselPagina.value = index;
   }
 
@@ -159,13 +167,11 @@ class HomeController extends GetxController {
 
     // 3. Se um resultado (data formatada) foi retornado...
     if (result != null && result is String) {
-      
       // 4. APLICA A MESMA SOLUÇÃO ROBUSTA DA OUTRA FUNÇÃO
       WidgetsBinding.instance.addPostFrameCallback((_) {
         // Pega o contexto seguro do GetMaterialApp
         final BuildContext? context = Get.key.currentContext;
         if (context != null && context.mounted) {
-          
           // Usa o ScaffoldMessenger nativo do Flutter
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
@@ -191,11 +197,10 @@ class HomeController extends GetxController {
     // Aqui você pode adicionar lógica para mudar o conteúdo da página
     // com base no índice, se necessário.
     // Ex: if (index == 1) { carregarFavoritos(); }
-    if(index == 1){
-      showCalendarPicker()
-;    }
+    if (index == 1) {
+      showCalendarPicker();
+    }
   }
-
 
   @override
   void onClose() {
