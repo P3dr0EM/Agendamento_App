@@ -156,7 +156,7 @@ class HomeController extends GetxController {
     // 2. 'await' pelo resultado do BottomSheet
     final dynamic result = await Get.bottomSheet(
       const CalendarWidget(),
-      backgroundColor: Colors.white,
+      backgroundColor: Get.theme.scaffoldBackgroundColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(16.0),
@@ -193,13 +193,21 @@ class HomeController extends GetxController {
 
   /// Altera o índice da aba selecionada no rodapé.
   void changeTabIndex(int index) {
-    tabIndex.value = index;
-    // Aqui você pode adicionar lógica para mudar o conteúdo da página
-    // com base no índice, se necessário.
-    // Ex: if (index == 1) { carregarFavoritos(); }
     if (index == 1) {
+      tabIndex.value = index;
       showCalendarPicker();
+      return;
     }
+
+    if (index == 2) {
+      // Navega para a tela de perfil em vez de ficar preso no mesmo índice.
+      Get.toNamed(Routes.PROFILE);
+      // Reseta o índice para não manter o item de perfil selecionado quando voltar ao Home.
+      tabIndex.value = 0;
+      return;
+    }
+
+    tabIndex.value = index;
   }
 
   @override

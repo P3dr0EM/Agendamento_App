@@ -14,8 +14,11 @@ class EmailField extends GetView<LoginController> {
                 child: Obx(() => TextField(
                   controller: controller.emailInput, //chama o controlador do campo de texto
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(label: const Text("EMAIL"),
-                  errorText: controller.errorEmail.value, //chama o controlador de erro          
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                  cursorColor: Theme.of(context).colorScheme.onSurface,
+                  decoration: InputDecoration(
+                    label: const Text("EMAIL"),
+                    errorText: controller.errorEmail.value, //chama o controlador de erro          
                   ),
                 ))
               );

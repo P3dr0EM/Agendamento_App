@@ -4,17 +4,22 @@ import 'package:una_agendamento/app/modules/agendamento/agendamento_controller.d
 import 'package:una_agendamento/app/modules/agendamento/widgets/calendar_card_widget.dart';
 import 'package:una_agendamento/app/modules/agendamento/widgets/confirmation_buttom_widget.dart';
 import 'package:una_agendamento/app/modules/agendamento/widgets/time_slots_widget.dart';
+import 'package:una_agendamento/constants.dart';
 
 class AgendamentoView extends GetView<AgendamentoController> {
   const AgendamentoView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       // O AppBar busca o nome do serviço do controller
       appBar: AppBar(
-        title: Obx(() => Text('Agendar ${controller.serviceName.value}')),
-        backgroundColor: const Color(0xFF5D0890), // Cor principal do app
+        title: Obx(() => Text('Agendar ${controller.serviceName.value}',
+          style: TextStyle(
+            color: theme.brightness == Brightness.dark ? preto : null,
+          ),
+        )),
         centerTitle: true,
       ),
       

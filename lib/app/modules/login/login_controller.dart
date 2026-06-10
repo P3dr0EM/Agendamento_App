@@ -126,6 +126,23 @@ class LoginController extends GetxController {
     Get.offAllNamed(Routes.HOME);
   }
 
+  Future<void> logout() async {
+    try {
+      // Sign out do Firebase
+      await FirebaseAuth.instance.signOut();
+      // Sign out do Google
+      await GoogleSignIn().signOut();
+      // Limpar campos
+      emailInput.clear();
+      senhaInput.clear();
+      // Navegar para login
+      Get.offAllNamed(Routes.LOGIN);
+    } catch (e) {
+      print('Erro ao fazer logout: $e');
+      Get.snackbar('Erro', 'Falha ao fazer logout');
+    }
+  }
+
   void printError(String error) {
     print('ERRO: $error');
   }

@@ -23,6 +23,8 @@ class EmailField extends GetView<CadastroController> {
               context,
             ).requestFocus(controller.senhaFocus); //muda o foco
           },
+          style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+          cursorColor: Theme.of(context).colorScheme.onSurface,
           decoration: InputDecoration(
             label: const Text("EMAIL"),
             errorText:

@@ -10,8 +10,9 @@ class CalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Acessa o HomeController que já está em memória.
     final controller = Get.find<HomeController>();
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
 
     return SafeArea(
       child: SingleChildScrollView(
@@ -19,25 +20,24 @@ class CalendarWidget extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Alça visual para indicar que o sheet é "puxável"
             Container(
               width: 40,
               height: 5,
               decoration: BoxDecoration(
-                color: Colors.grey[300],
+                color: colorScheme.onSurface.withAlpha((0.2 * 255).round()),
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
             const SizedBox(height: 16),
-            const Text(
+            Text(
               'Selecione uma Data',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              style: theme.textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
+                color: colorScheme.onSurface,
+              ),
             ),
             const SizedBox(height: 16),
-            // Obx garante que o calendário se reconstrua ao selecionar um dia.
             Obx(() {
-              // O SEGREDO: Ler a lista reativa aqui fora avisa o Obx que ele
-              // precisa redesenhar o calendário inteiro sempre que um novo dia for adicionado.
               final diasComAgendamento = controller.diasAgendados.toList();
 
               return TableCalendar(
@@ -47,55 +47,63 @@ class CalendarWidget extends StatelessWidget {
                 focusedDay: controller.focusedDay.value,
                 calendarFormat: CalendarFormat.month,
                 availableGestures: AvailableGestures.horizontalSwipe,
-
                 selectedDayPredicate: (day) =>
                     isSameDay(controller.selectedDay.value, day),
                 onDaySelected: controller.onDaySelected,
-
                 onPageChanged: (focusedDay) {
                   controller.focusedDay.value = focusedDay;
                 },
-
-                headerStyle: const HeaderStyle(
+                headerStyle: HeaderStyle(
                   formatButtonVisible: false,
                   titleCentered: true,
-                  titleTextStyle: TextStyle(
-                    fontSize: 18.0,
+                  titleTextStyle: theme.textTheme.titleMedium!.copyWith(
                     fontWeight: FontWeight.bold,
+                    color: colorScheme.onSurface,
                   ),
                   leftChevronIcon: Icon(
                     Icons.chevron_left,
-                    color: Colors.black54,
+                    color: colorScheme.onSurface,
                   ),
                   rightChevronIcon: Icon(
                     Icons.chevron_right,
-                    color: Colors.black54,
+                    color: colorScheme.onSurface,
                   ),
                 ),
-
                 calendarStyle: CalendarStyle(
                   todayDecoration: BoxDecoration(
-                    color: Colors.grey[300],
+                    color: colorScheme.secondaryContainer,
                     shape: BoxShape.circle,
                   ),
-                  todayTextStyle: const TextStyle(color: Colors.black87),
-                  selectedDecoration: const BoxDecoration(
-                    color: Colors.blue,
+                  todayTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                    color: colorScheme.onSecondaryContainer,
+                  ),
+                  selectedDecoration: BoxDecoration(
+                    color: colorScheme.primary,
                     shape: BoxShape.circle,
                   ),
-                  selectedTextStyle: const TextStyle(
-                    color: Colors.white,
+                  selectedTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                    color: colorScheme.onPrimary,
                     fontWeight: FontWeight.bold,
                   ),
-                  weekendTextStyle: TextStyle(color: Colors.red.shade400),
+                  defaultTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                    color: colorScheme.onSurface,
+                  ),
+                  weekendTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                    color: colorScheme.secondary,
+                  ),
                   outsideDaysVisible: false,
+                  outsideTextStyle: theme.textTheme.bodyMedium!.copyWith(
+                    color: theme.disabledColor,
+                  ),
                 ),
-
-                daysOfWeekStyle: const DaysOfWeekStyle(
-                  weekendStyle: TextStyle(color: Colors.red),
+                daysOfWeekStyle: DaysOfWeekStyle(
+                  weekdayStyle: theme.textTheme.bodySmall!.copyWith(
+                    color: colorScheme.onSurfaceVariant,
+                  ),
+                  weekendStyle: theme.textTheme.bodySmall!.copyWith(
+                    color: colorScheme.secondary,
+                  ),
                 ),
-
-                // Construtor dos Círculos
                 calendarBuilders: CalendarBuilders(
                   markerBuilder: (context, day, events) {
                     final normalizedDay = DateTime(
@@ -104,7 +112,6 @@ class CalendarWidget extends StatelessWidget {
                       day.day,
                     );
 
-                    // Usa a lista que carregamos no início do Obx
                     if (diasComAgendamento.contains(normalizedDay)) {
                       return Positioned.fill(
                         child: Container(
@@ -112,7 +119,7 @@ class CalendarWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(
-                              color: Colors.blueAccent,
+                              color: colorScheme.primary,
                               width: 2.5,
                             ),
                           ),
@@ -125,29 +132,27 @@ class CalendarWidget extends StatelessWidget {
               );
             }),
             const SizedBox(height: 20),
-            // Botão de confirmação com estilo
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
                 icon: const Icon(Icons.check),
                 label: const Text('Confirmar'),
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
+                  backgroundColor: colorScheme.primary,
+                  foregroundColor: colorScheme.onPrimary,
                   padding: const EdgeInsets.symmetric(vertical: 12),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
                 onPressed: () {
-                  // Formata a data para dd/MM/yyyy para o snackbar
                   final formattedDate =
                       "${controller.selectedDay.value.day.toString().padLeft(2, '0')}/${controller.selectedDay.value.month.toString().padLeft(2, '0')}/${controller.selectedDay.value.year}";
 
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text('Você escolheu: $formattedDate'),
-                      backgroundColor: Colors.black87,
+                      backgroundColor: colorScheme.surface,
                       behavior: SnackBarBehavior.floating,
                       margin: const EdgeInsets.all(12),
                       duration: const Duration(seconds: 3),

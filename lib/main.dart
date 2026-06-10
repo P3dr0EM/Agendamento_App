@@ -2,7 +2,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
+import 'package:una_agendamento/app/services/theme_service.dart';
+import 'package:una_agendamento/constants.dart';
+
 import 'package:una_agendamento/app/routes/app_pages.dart';
 import 'package:una_agendamento/app/services/data_format_service.dart';
 import 'package:una_agendamento/firebase_options.dart';
@@ -41,6 +45,12 @@ void main() async {
       'Firebase já estava inicializado. Apps: ${Firebase.apps.map((a) => a.name).toList()}',
     );
   }
+  // ThemeService + GetStorage
+  // Importante: GetStorage.init() precisa rodar antes do app.
+  await GetStorage.init();
+  Get.put<ThemeService>(ThemeService(), permanent: true);
+  await Get.find<ThemeService>().init();
+
   runApp(const MyApp());
 }
 
@@ -50,21 +60,105 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
+    final themeService = Get.find<ThemeService>();
 
-      // 4. Adicione as configurações de localização ao GetMaterialApp
-      localizationsDelegates: const [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: const [
-        Locale('pt', 'BR'), // Adiciona o suporte para Português do Brasil
-      ],
-      locale: const Locale('pt', 'BR'), // Define como o locale padrão
+    return GetX<ThemeService>(
+      init: themeService,
+      builder: (_) {
+        final lightScheme = ColorScheme.fromSeed(
+          seedColor: corRoxaPrincipal,
+          brightness: Brightness.light,
+        );
+        final darkScheme = ColorScheme.fromSeed(
+          seedColor: corRoxaPrincipal,
+          brightness: Brightness.dark,
+        );
+
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          initialRoute: AppPages.INITIAL,
+          getPages: AppPages.routes,
+          theme: ThemeData(
+            useMaterial3: true,
+            colorScheme: lightScheme,
+            textTheme: Typography.material2021().black.apply(
+              bodyColor: Colors.black,
+              displayColor: Colors.black,
+            ),
+            scaffoldBackgroundColor: lightScheme.surface,
+            appBarTheme: AppBarTheme(
+              backgroundColor: corRoxaPrincipal,
+              foregroundColor: lightScheme.onPrimary,
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[300],
+                foregroundColor: Colors.black,
+              ),
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              floatingLabelStyle: TextStyle(color: Colors.grey[900]),
+              labelStyle: TextStyle(color: Colors.grey[800]),
+              hintStyle: TextStyle(color: Colors.grey[700]),
+              helperStyle: TextStyle(color: Colors.grey[700]),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: corRoxaPrincipal.withAlpha((0.7 * 255).round())),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: corRoxaPrincipal),
+              ),
+              fillColor: Colors.grey[50],
+              filled: true,
+            ),
+          ),
+          darkTheme: ThemeData(
+            useMaterial3: true,
+            colorScheme: darkScheme,
+            textTheme: Typography.material2021().white.apply(
+              bodyColor: Colors.white,
+              displayColor: Colors.white,
+            ),
+            scaffoldBackgroundColor: darkScheme.surface,
+            appBarTheme: AppBarTheme(
+              backgroundColor: corRoxaPrincipal,
+              foregroundColor: darkScheme.onPrimary,
+            ),
+            elevatedButtonTheme: ElevatedButtonThemeData(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[700],
+                foregroundColor: Colors.white,
+              ),
+            ),
+            inputDecorationTheme: InputDecorationTheme(
+              floatingLabelStyle: TextStyle(color: Colors.grey[300]),
+              labelStyle: TextStyle(color: Colors.grey[400]),
+              hintStyle: TextStyle(color: Colors.grey[500]),
+              helperStyle: TextStyle(color: Colors.grey[500]),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: corRoxaPrincipal.withAlpha((0.7 * 255).round())),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: corRoxaPrincipal),
+              ),
+              fillColor: Colors.grey[850],
+              filled: true,
+            ),
+          ),
+          themeMode: themeService.theme,
+          // 4. Adicione as configurações de localização ao GetMaterialApp
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('pt', 'BR'), // Adiciona o suporte para Português do Brasil
+          ],
+          locale: const Locale('pt', 'BR'), // Define como o locale padrão
+        );
+      },
     );
   }
 }
+
+
