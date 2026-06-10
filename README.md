@@ -66,7 +66,7 @@ Atualmente, o agendamento de consultas e atendimentos na instituição apresenta
  3. Agende o dia e horário disponíveis.
  4. Você pode baixar a versão mais recente do aplicativo pronta para instalação no link abaixo:
 
-[📥 Baixar APK v1.0.0](https://github.com/P3dr0EM/Agendamento_App/releases/tag/v0.0.1)
+[!Download APK](https://github.com/P3dr0EM/Agendamento_App/releases/download/v1.0.1/app-release.apk))
 
 ## 📌 Integrantes do Grupo
 
