@@ -7,31 +7,30 @@ class CadastroButtom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Centraliza a linha
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
           "Não possui uma conta?",
           style: TextStyle(
-            color: Colors.grey[700],
+            color: isDark ? const Color(0xFFBDBDBD) : Colors.grey[700],
             fontSize: 16,
           ),
         ),
-        const SizedBox(width: 4), // Pequeno espaço
-        
-        // O texto clicável
+        const SizedBox(width: 4),
         GestureDetector(
           onTap: () {
-            // Ação de navegação
             Get.toNamed(Routes.CADASTRO);
           },
-          child: const Text(
+          child: Text(
             "Cadastre-se",
             style: TextStyle(
-              color: Color(0xFF5D0890), // Cor roxa principal do app
+              color: isDark ? const Color(0xFFC77DFF) : const Color(0xFF5D0890),
               fontWeight: FontWeight.bold,
               fontSize: 16,
-              decoration: TextDecoration.underline, // Sublinhado para indicar link
+              decoration: TextDecoration.underline,
             ),
           ),
         ),

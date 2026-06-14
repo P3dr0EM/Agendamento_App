@@ -10,16 +10,26 @@ class LoginButton extends GetView<LoginController> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Center(
       child: ElevatedButton(
-        onPressed: controller.logar, //chama a função de logar da classe LoginControlle
-        
+        onPressed: controller.logar,
         style: ElevatedButton.styleFrom(
-          backgroundColor: const Color.fromARGB(255, 87, 35, 137),
-          foregroundColor: const Color.fromARGB(255, 255, 255, 255),
-          padding: EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+          backgroundColor: const Color(0xFFB05CFF),
+          foregroundColor: const Color(0xFFFFFFFF),
+          padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 20),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
         ),
-        child: Text("Logar"),
+        child: const Text(
+          "Logar",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
     );
   }

@@ -10,12 +10,18 @@ class ForgetPassword extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsetsGeometry.only(left: 8, right: 8),
-      child: Text(
-        "Esqueceu a senha? Clique aqui!",
-        textAlign: TextAlign.left,
-        style: TextStyle(
-          color: isDark ? Colors.grey[300] : corRoxaPrincipal,
-          decoration: TextDecoration.none,
+      child: GestureDetector(
+        onTap: () {
+          // Ação para recuperar senha
+        },
+        child: Text(
+          "Esqueceu a senha? Clique aqui!",
+          textAlign: TextAlign.left,
+          style: TextStyle(
+            color: isDark ? const Color(0xFFC77DFF) : corRoxaPrincipal,
+            decoration: TextDecoration.none,
+            fontWeight: FontWeight.w500,
+          ),
         ),
       ),
     );

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:una_agendamento/app/modules/home/home_controller.dart';
+import 'package:una_agendamento/app/services/theme_service.dart';
 import 'package:una_agendamento/constants.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -11,23 +12,28 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     // Usamos Get.find() para obter a instância do HomeController
     // que já foi inicializada pelo HomeBinding.
     final controller = Get.find<HomeController>();
+    final themeService = Get.find<ThemeService>();
 
     return Obx(() {
       if (controller.isSearching.value) {
         // --- APPBAR NO MODO DE PESQUISA ---
+        final isDark = themeService.isDark.value;
+        final textColor = isDark ? Colors.white : Colors.black87;
+        final hintColor = isDark ? Colors.white60 : Colors.grey[600];
+        
         return AppBar(
           leading: IconButton(
-            icon: const Icon(Icons.close, color: Colors.white),
+            icon: Icon(Icons.close, color: isDark ? Colors.white : Colors.white),
             onPressed: controller.toggleSearch,
           ),
           title: TextField(
             controller: controller.searchController,
             focusNode: controller.searchFocusNode,
-            style: const TextStyle(color: Colors.white),
-            cursorColor: Colors.white,
-            decoration: const InputDecoration(
+            style: TextStyle(color: textColor),
+            cursorColor: textColor,
+            decoration: InputDecoration(
               hintText: 'Pesquisar...',
-              hintStyle: TextStyle(color: Colors.white60),
+              hintStyle: TextStyle(color: hintColor),
               border: InputBorder.none,
             ),
           ),

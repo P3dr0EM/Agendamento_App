@@ -113,34 +113,37 @@ class MyApp extends StatelessWidget {
           ),
           darkTheme: ThemeData(
             useMaterial3: true,
-            colorScheme: darkScheme,
-            textTheme: Typography.material2021().white.apply(
-              bodyColor: Colors.white,
-              displayColor: Colors.white,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color(0xFFB05CFF),
+              brightness: Brightness.dark,
             ),
-            scaffoldBackgroundColor: darkScheme.surface,
+            textTheme: Typography.material2021().white.apply(
+              bodyColor: const Color(0xFFFFFFFF),
+              displayColor: const Color(0xFFFFFFFF),
+            ),
+            scaffoldBackgroundColor: const Color(0xFF121212),
             appBarTheme: AppBarTheme(
-              backgroundColor: corRoxaPrincipal,
-              foregroundColor: darkScheme.onPrimary,
+              backgroundColor: const Color(0xFFB05CFF),
+              foregroundColor: const Color(0xFFFFFFFF),
             ),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.grey[700],
-                foregroundColor: Colors.white,
+                backgroundColor: const Color(0xFF333333),
+                foregroundColor: const Color(0xFFFFFFFF),
               ),
             ),
             inputDecorationTheme: InputDecorationTheme(
-              floatingLabelStyle: TextStyle(color: Colors.grey[300]),
-              labelStyle: TextStyle(color: Colors.grey[400]),
-              hintStyle: TextStyle(color: Colors.grey[500]),
-              helperStyle: TextStyle(color: Colors.grey[500]),
-              enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: corRoxaPrincipal.withAlpha((0.7 * 255).round())),
+              floatingLabelStyle: const TextStyle(color: Color(0xFFC77DFF)),
+              labelStyle: const TextStyle(color: Color(0xFFB0B0B0)),
+              hintStyle: const TextStyle(color: Color(0xFF808080)),
+              helperStyle: const TextStyle(color: Color(0xFF808080)),
+              enabledBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFB05CFF)),
               ),
-              focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: corRoxaPrincipal),
+              focusedBorder: const UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFFC77DFF)),
               ),
-              fillColor: Colors.grey[850],
+              fillColor: const Color(0xFF1E1E1E),
               filled: true,
             ),
           ),
