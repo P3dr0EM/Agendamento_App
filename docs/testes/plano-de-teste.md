@@ -28,7 +28,7 @@
 | --------------------------------------- | ----------- | ----------------- |
 | 🧩 Funcionalidades                      |Login, visualização de serviços, agendamento e gerenciamento de consultas|Funcionalidades futuras ainda não implementadas|
 | 🧠 Regras de negócio                    |Validação de datas, disponibilidade de horários e permissões de acesso|Regras ainda não definidas pela equipe|
-| 🔌 Integrações                          |Comunicação com APIs simuladas (MockClient)|Integrações externas não implementadas|
+| 🔌 Integrações                          |Google Calendar API|Integrações externas não implementadas|
 | 🗃️ Dados                               |Dados utilizados durante os testes unitários e manuais|Persistência em banco de dados (não utilizada)|
 | 🧑‍💻 Não-funcionais (usabilidade etc.) |Usabilidade, navegabilidade e responsividade básica|Testes avançados de carga, estresse e segurança|
 
