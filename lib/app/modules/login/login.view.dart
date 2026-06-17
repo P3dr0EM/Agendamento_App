@@ -24,7 +24,7 @@ class LoginView extends GetView<LoginController> {
     final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
-      backgroundColor: corRoxaPrincipal,
+      backgroundColor: isDark ? const Color(0xFF121212) : corRoxaPrincipal,
 
       body: SafeArea(
         child: LayoutBuilder(
@@ -57,11 +57,11 @@ class LoginView extends GetView<LoginController> {
                           child: Container(
                             constraints: const BoxConstraints(maxWidth: 500),
                             decoration: BoxDecoration(
-                              color: isDark ? cinzaEscuro : branco,
-                              borderRadius: BorderRadius.circular(16.0),
+                              color: isDark ? const Color(0xFF1E1E1E) : branco,
+                              borderRadius: BorderRadius.circular(24.0),
                               boxShadow: [
                                 BoxShadow(
-                                  color: Colors.black.withOpacity(0.2),
+                                  color: Colors.black.withOpacity(0.3),
                                   blurRadius: 15,
                                   offset: const Offset(0, 5),
                                 ),
@@ -76,20 +76,22 @@ class LoginView extends GetView<LoginController> {
                               mainAxisSize: MainAxisSize.min,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                const Center(
+                                Center(
                                   child: Text(
                                     "Bem-Vindo!",
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
-                                      color: corRoxaPrincipal,
+                                      color: isDark
+                                          ? const Color(0xFFFFFFFF)
+                                          : corRoxaPrincipal,
                                     ),
                                   ),
                                 ),
                                 const SizedBox(height: 10),
-                                const EmailField(),
+                                EmailField(isDark: isDark),
                                 const SizedBox(height: 10),
-                                const PasswordField(),
+                                PasswordField(isDark: isDark),
                                 const SizedBox(height: 10),
                                 const ForgetPassword(),
                                 const CheckboxField(),

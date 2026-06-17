@@ -25,28 +25,33 @@ class ProfilePage extends GetView<ProfileController> {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
+          // CABEÇALHO DO PERFIL
           Center(
             child: Column(
               children: [
-                InkWell(
-                  onTap: () => Get.snackbar(
-                    'Perfil',
-                    'Você já está na página de perfil.',
-                    snackPosition: SnackPosition.BOTTOM,
-                  ),
+                Obx(() => InkWell(
+                  onTap: controller.changeAvatar,
                   borderRadius: BorderRadius.circular(100),
                   child: CircleAvatar(
                     radius: 48,
                     backgroundImage: AssetImage(controller.avatarAsset.value),
+                    child: const Align(
+                      alignment: Alignment.bottomRight,
+                      child: CircleAvatar(
+                        radius: 16,
+                        backgroundColor: Colors.white,
+                        child: Icon(Icons.camera_alt, size: 16, color: Colors.black87),
+                      ),
+                    ),
                   ),
-                ),
+                )),
                 const SizedBox(height: 12),
-                Text(
+                Obx(() => Text(
                   controller.userName.value,
                   style: theme.textTheme.titleLarge?.copyWith(
                     fontWeight: FontWeight.bold,
                   ),
-                ),
+                )),
                 const SizedBox(height: 4),
                 Text(
                   'Bem-vindo(a)!',
@@ -58,6 +63,8 @@ class ProfilePage extends GetView<ProfileController> {
             ),
           ),
           const SizedBox(height: 24),
+          
+          // OPÇÕES DO PERFIL
           Card(
             child: Column(
               children: [
@@ -65,70 +72,78 @@ class ProfilePage extends GetView<ProfileController> {
                   leading: const Icon(Icons.edit_outlined),
                   title: const Text('Editar perfil'),
                   trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Get.snackbar(
-                    'Editar perfil',
-                    'Funcionalidade em desenvolvimento.',
-                    snackPosition: SnackPosition.BOTTOM,
-                  ),
+                  onTap: controller.editProfile,
                 ),
                 const Divider(height: 1),
                 ListTile(
                   leading: const Icon(Icons.settings_outlined),
-                  title: Text(
-                    'Configurações'),
+                  title: const Text('Configurações'),
                   trailing: const Icon(Icons.chevron_right),
                   onTap: () => Get.toNamed(Routes.SETTINGS),
                 ),
                 const Divider(height: 1),
                 ListTile(
-                  leading: const Icon(Icons.calendar_month_outlined),
-                  title: const Text('Meus agendamentos'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Get.snackbar(
-                    'Meus agendamentos',
-                    'Funcionalidade em desenvolvimento.',
-                    snackPosition: SnackPosition.BOTTOM,
-                  ),
-                ),
-                const Divider(height: 1),
-                ListTile(
-                  leading: const Icon(Icons.person_outline),
-                  title: const Text('Ver perfil'),
-                  trailing: const Icon(Icons.chevron_right),
-                  onTap: () => Get.snackbar(
-                    'Ver perfil',
-                    'Você já está na página de perfil.',
-                    snackPosition: SnackPosition.BOTTOM,
-                  ),
+                  leading: const Icon(Icons.logout, color: Colors.red),
+                  title: const Text('Sair da conta', style: TextStyle(color: Colors.red)),
+                  onTap: controller.logout,
                 ),
               ],
             ),
           ),
           const SizedBox(height: 16),
+          
+          // LISTA DE AGENDAMENTOS (Com reatividade de Loading)
           Card(
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    'Itens',
-                    style: theme.textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Meus Agendamentos',
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.refresh, size: 20),
+                        onPressed: controller.fetchAgendamentos,
+                      )
+                    ],
                   ),
                   const SizedBox(height: 12),
-                  ...controller.agendamentos.map((e) {
-                    return ListTile(
-                      contentPadding: EdgeInsets.zero,
-                      dense: true,
-                      title: Text(e),
-                      trailing: const Icon(Icons.open_in_new_outlined, size: 18),
-                      onTap: () => Get.snackbar(
-                        'Agendamento',
-                        'Funcionalidade em desenvolvimento.',
-                        snackPosition: SnackPosition.BOTTOM,
-                      ),
+                  
+                  // Envolvendo a lista em um Obx para escutar o estado de carregamento
+                  Obx(() {
+                    if (controller.isLoading.value) {
+                      return const Center(
+                        child: Padding(
+                          padding: EdgeInsets.all(16.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    
+                    if (controller.agendamentos.isEmpty) {
+                      return const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 16),
+                        child: Text('Nenhum agendamento encontrado.'),
+                      );
+                    }
+
+                    return Column(
+                      children: controller.agendamentos.map((agendamento) {
+                        return ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          dense: true,
+                          title: Text(agendamento),
+                          trailing: const Icon(Icons.open_in_new_outlined, size: 18),
+                          onTap: () => controller.openAgendamentoDetails(agendamento),
+                        );
+                      }).toList(),
                     );
                   }),
                 ],
@@ -140,4 +155,3 @@ class ProfilePage extends GetView<ProfileController> {
     );
   }
 }
-
