@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, unused_local_variable
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -102,7 +102,9 @@ class MyApp extends StatelessWidget {
               hintStyle: TextStyle(color: Colors.grey[700]),
               helperStyle: TextStyle(color: Colors.grey[700]),
               enabledBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: corRoxaPrincipal.withAlpha((0.7 * 255).round())),
+                borderSide: BorderSide(
+                  color: corRoxaPrincipal.withAlpha((0.7 * 255).round()),
+                ),
               ),
               focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: corRoxaPrincipal),
@@ -163,5 +165,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

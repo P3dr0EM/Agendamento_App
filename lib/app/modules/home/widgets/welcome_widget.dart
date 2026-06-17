@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:una_agendamento/app/routes/app_routes.dart';
@@ -18,16 +20,13 @@ class WelcomeHeaderWidget extends StatelessWidget {
           const Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                'Olá,',
-                style: TextStyle(fontSize: 16, color: Colors.grey),
-              ),
+              Text('Olá,', style: TextStyle(fontSize: 16, color: Colors.grey)),
               Text(
                 'Bem-vindo!',
                 style: TextStyle(
                   fontSize: 22,
                   fontWeight: FontWeight.bold,
-                  color: Color(0xFF5D0890), 
+                  color: Color(0xFF5D0890),
                 ),
               ),
             ],
@@ -43,26 +42,30 @@ class WelcomeHeaderWidget extends StatelessWidget {
             onPressed: () {
               Get.dialog(
                 BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0), 
+                  filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
                   child: Center(
                     child: Container(
                       padding: const EdgeInsets.all(20),
                       margin: const EdgeInsets.symmetric(horizontal: 40),
                       decoration: BoxDecoration(
-                        color: Colors.white, 
+                        color: Colors.white,
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Icon(Icons.help_outline, size: 50, color: Colors.purple),
+                          const Icon(
+                            Icons.help_outline,
+                            size: 50,
+                            color: Colors.purple,
+                          ),
                           const SizedBox(height: 16),
                           const Text(
                             'Tutorial',
                             style: TextStyle(
-                              fontSize: 20, 
+                              fontSize: 20,
                               fontWeight: FontWeight.bold,
-                              decoration: TextDecoration.none, 
+                              decoration: TextDecoration.none,
                               color: Colors.black,
                             ),
                           ),
@@ -78,41 +81,55 @@ class WelcomeHeaderWidget extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 24),
-                          
+
                           // --- INÍCIO DOS BOTÕES ---
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly, 
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               // BOTÃO NÃO
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red, 
-                                  padding: const EdgeInsets.symmetric(horizontal: 24), 
+                                  backgroundColor: Colors.red,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                  ),
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pop(); // Fecha o diálogo
+                                  Navigator.of(
+                                    context,
+                                  ).pop(); // Fecha o diálogo
                                 },
-                                child: const Text('Não', style: TextStyle(color: Colors.white)),
+                                child: const Text(
+                                  'Não',
+                                  style: TextStyle(color: Colors.white),
+                                ),
                               ),
-                              
+
                               // BOTÃO SIM
                               ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.green,
-                                  padding: const EdgeInsets.symmetric(horizontal: 24),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 24,
+                                  ),
                                 ),
                                 onPressed: () {
-                                  Navigator.of(context).pop(); // Fecha a pergunta
+                                  Navigator.of(
+                                    context,
+                                  ).pop(); // Fecha a pergunta
 
                                   // Abre a tela do tutorial
                                   Get.dialog(
                                     const TutorialOverlay(),
-                                    useSafeArea: false, 
-                                    barrierColor: Colors.transparent, 
+                                    useSafeArea: false,
+                                    barrierColor: Colors.transparent,
                                   );
                                 },
-                                child: const Text('Sim', style: TextStyle(color: Colors.white)),
-                              ), 
+                                child: const Text(
+                                  'Sim',
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
                             ],
                           ),
                           // --- FIM DOS BOTÕES ---
@@ -121,7 +138,7 @@ class WelcomeHeaderWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                barrierColor: Colors.black.withOpacity(0.2), 
+                barrierColor: Colors.black.withOpacity(0.2),
               );
             },
           ),
@@ -134,13 +151,9 @@ class WelcomeHeaderWidget extends StatelessWidget {
               Get.toNamed(Routes.PROFILE);
             },
             child: CircleAvatar(
-              radius: 24, 
-              backgroundColor: Colors.grey[300], 
-              child: Icon(
-                Icons.person,
-                color: Colors.grey[600], 
-                size: 30,
-              ),
+              radius: 24,
+              backgroundColor: Colors.grey[300],
+              child: Icon(Icons.person, color: Colors.grey[600], size: 30),
             ),
           ),
         ],

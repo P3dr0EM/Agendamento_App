@@ -1,3 +1,6 @@
+// ignore: file_names
+// ignore_for_file: file_names, duplicate_ignore, deprecated_member_use
+
 import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -8,7 +11,7 @@ import 'package:una_agendamento/app/modules/agendamento/agendamento_controller.d
 class TutorialOverlay extends StatefulWidget {
   final int initialStep;
 
-  const TutorialOverlay({Key? key, this.initialStep = 0}) : super(key: key);
+  const TutorialOverlay({super.key, this.initialStep = 0});
 
   @override
   State<TutorialOverlay> createState() => _TutorialOverlayState();
@@ -33,11 +36,13 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    
+
     if (_routeAnimation == null) {
       _routeAnimation = ModalRoute.of(context)?.animation;
 
-      if (_passoAtual == 3 && _routeAnimation != null && !_routeAnimation!.isCompleted) {
+      if (_passoAtual == 3 &&
+          _routeAnimation != null &&
+          !_routeAnimation!.isCompleted) {
         _routeAnimation!.addStatusListener(_handleAnimationStatus);
       } else {
         if (!_mostrarConteudo) {
@@ -86,8 +91,8 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
 
   // --- Encerra o tutorial e volta para a Home ---
   void _finalizarTutorial() {
-    Navigator.of(context).pop(); 
-    Get.back(); 
+    Navigator.of(context).pop();
+    Get.back();
   }
 
   CustomClipper<Path>? _getCustomClipper() {
@@ -99,7 +104,7 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
       case 3:
         return CalendarHoleClipper();
       case 4:
-        return DateHoleClipper(); 
+        return DateHoleClipper();
       case 5:
         return ButtonHoleClipper();
       default:
@@ -130,7 +135,7 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
               child: GestureDetector(
                 onTap: () {
                   // Se for o passo 2, o clique no fundo não faz nada (força clicar no botão dentista)
-                  if (_passoAtual == 2) return; 
+                  if (_passoAtual == 2) return;
 
                   // Direciona para a ação correta com base no passo atual
                   if (_passoAtual == 3) {
@@ -179,13 +184,22 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
               Text(
                 'Bem-vindo ao Tutorial!',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.black, decoration: TextDecoration.none),
+                style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                  decoration: TextDecoration.none,
+                ),
               ),
               SizedBox(height: 10),
               Text(
                 'Toque em qualquer lugar da tela para continuar.',
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.black87, decoration: TextDecoration.none),
+                style: TextStyle(
+                  fontSize: 16,
+                  color: Colors.black87,
+                  decoration: TextDecoration.none,
+                ),
               ),
             ],
           ),
@@ -216,12 +230,24 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),
-              boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5))],
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.black12,
+                  blurRadius: 10,
+                  offset: Offset(0, 5),
+                ),
+              ],
             ),
             child: const Text(
               'Esses são os serviços fornecidos de graça que o app trabalha, ao clicar nestes você será redirecionado para uma tela com um calendário onde poderá marcar uma data de consulta.',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 15, color: Colors.black87, fontWeight: FontWeight.w600, height: 1.3, decoration: TextDecoration.none),
+              style: TextStyle(
+                fontSize: 15,
+                color: Colors.black87,
+                fontWeight: FontWeight.w600,
+                height: 1.3,
+                decoration: TextDecoration.none,
+              ),
             ),
           ),
         ],
@@ -255,12 +281,24 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5))],
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
                 ),
                 child: const Text(
                   'Vamos testar? Toque no botão "Dentista" em destaque abaixo para ir para a tela de agendamento.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black87, fontWeight: FontWeight.w600, height: 1.3, decoration: TextDecoration.none),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600,
+                    height: 1.3,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
               ),
             ],
@@ -322,12 +360,24 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5))],
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
                 ),
                 child: const Text(
                   'Excelente! Agora selecione o dia e o horário desejados no calendário em destaque para finalizar o seu agendamento.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black87, fontWeight: FontWeight.w600, height: 1.3, decoration: TextDecoration.none),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600,
+                    height: 1.3,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
               ),
             ],
@@ -377,12 +427,24 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5))],
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
                 ),
                 child: const Text(
                   'Esse é o campo de data, aqui você deve escolher o horário disponível, que deseja ser atendido.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black87, fontWeight: FontWeight.w600, height: 1.3, decoration: TextDecoration.none),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600,
+                    height: 1.3,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
               ),
             ],
@@ -432,12 +494,24 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 10, offset: Offset(0, 5))],
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 10,
+                      offset: Offset(0, 5),
+                    ),
+                  ],
                 ),
                 child: const Text(
                   'Por fim, ao selecionar a data o botão ficara azul, basta tocar neste botão para concluir o agendamento da sua consulta! O app criará um compromisso no Google Calendar para te lembrar da consulta.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 15, color: Colors.black87, fontWeight: FontWeight.w600, height: 1.3, decoration: TextDecoration.none),
+                  style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.black87,
+                    fontWeight: FontWeight.w600,
+                    height: 1.3,
+                    decoration: TextDecoration.none,
+                  ),
                 ),
               ),
             ],
@@ -461,7 +535,7 @@ class _TutorialOverlayState extends State<TutorialOverlay> {
       ],
     );
   }
-} 
+}
 
 // === CUSTOM CLIPPERS ===
 
@@ -470,10 +544,12 @@ class HoleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
     final holePath = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-        Rect.fromLTWH(10, size.height * 0.50, size.width - 20, 370),
-        const Radius.circular(16),
-      ));
+      ..addRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(10, size.height * 0.50, size.width - 20, 370),
+          const Radius.circular(16),
+        ),
+      );
     return Path.combine(PathOperation.difference, path, holePath);
   }
 
@@ -486,10 +562,12 @@ class SingleHoleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
     final holePath = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-        Rect.fromLTWH(10, size.height * 0.55, 130, 130),
-        const Radius.circular(16),
-      ));
+      ..addRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(10, size.height * 0.55, 130, 130),
+          const Radius.circular(16),
+        ),
+      );
     return Path.combine(PathOperation.difference, path, holePath);
   }
 
@@ -502,10 +580,12 @@ class CalendarHoleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
     final holePath = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-        Rect.fromLTWH(15, size.height * 0.15, size.width - 30, 360),
-        const Radius.circular(24),
-      ));
+      ..addRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(15, size.height * 0.15, size.width - 30, 360),
+          const Radius.circular(24),
+        ),
+      );
     return Path.combine(PathOperation.difference, path, holePath);
   }
 
@@ -518,10 +598,12 @@ class DateHoleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
     final holePath = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-        Rect.fromLTWH(15, size.height * 0.60, size.width - 30, 100), 
-        const Radius.circular(16),
-      ));
+      ..addRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(15, size.height * 0.60, size.width - 30, 100),
+          const Radius.circular(16),
+        ),
+      );
     return Path.combine(PathOperation.difference, path, holePath);
   }
 
@@ -534,10 +616,12 @@ class ButtonHoleClipper extends CustomClipper<Path> {
   Path getClip(Size size) {
     final path = Path()..addRect(Rect.fromLTWH(0, 0, size.width, size.height));
     final holePath = Path()
-      ..addRRect(RRect.fromRectAndRadius(
-        Rect.fromLTWH(20, size.height * 0.86, size.width - 40, 100), 
-        const Radius.circular(12),
-      ));
+      ..addRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(20, size.height * 0.86, size.width - 40, 100),
+          const Radius.circular(12),
+        ),
+      );
     return Path.combine(PathOperation.difference, path, holePath);
   }
 

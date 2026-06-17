@@ -10,7 +10,6 @@ import 'package:una_agendamento/app/modules/login/widgets/forget_password.dart';
 import 'package:una_agendamento/app/modules/login/widgets/google_button.dart';
 import 'package:una_agendamento/app/modules/login/widgets/login_button.dart';
 import 'package:una_agendamento/app/modules/login/widgets/password_field.dart';
-import 'package:una_agendamento/app/services/theme_service.dart';
 import 'package:una_agendamento/constants.dart';
 
 class LoginView extends GetView<LoginController> {
@@ -83,7 +82,9 @@ class LoginView extends GetView<LoginController> {
                                     style: TextStyle(
                                       fontSize: 25,
                                       fontWeight: FontWeight.bold,
-                                      color: isDark ? const Color(0xFFFFFFFF) : corRoxaPrincipal,
+                                      color: isDark
+                                          ? const Color(0xFFFFFFFF)
+                                          : corRoxaPrincipal,
                                     ),
                                   ),
                                 ),
